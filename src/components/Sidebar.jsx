@@ -8,12 +8,14 @@ import {
     MoreVertical
 } from 'lucide-react'
 
+import { NavLink } from 'react-router-dom'
+
 const menuItems = [
-    { name: 'Overview', icon: LayoutDashboard },
-    { name: 'Projects', icon: FolderKanban },
-    { name: 'Tasks', icon: ListTodo },
-    { name: 'Calendar', icon: CalendarDays },
-    { name: 'Activity', icon: Activity }
+    { name: 'Overview', icon: LayoutDashboard, path: '/' },
+    { name: 'Projects', icon: FolderKanban, path: '/projects' },
+    { name: 'Tasks', icon: ListTodo, path: '/tasks' },
+    { name: 'Calendar', icon: CalendarDays, path: '/calendar' },
+    { name: 'Activity', icon: Activity, path: '/activity' }
 ]
 
 function Sidebar() {
@@ -29,34 +31,46 @@ function Sidebar() {
                 <p className="sidebar-label">WORKSPACE</p>
 
                 <nav className="sidebar-nav">
+
                     {menuItems.map((item) => {
                         const Icon = item.icon
 
                         return (
-                            <a
-                                href="#"
+                            <NavLink
                                 key={item.name}
-                                className={`nav-item ${item.name === 'Overview' ? 'active' : ''}`}
+                                to={item.path}
+                                className={({ isActive }) =>
+                                    `nav-item ${isActive ? 'active' : ''}`
+                                }
                             >
                                 <Icon size={16} strokeWidth={1.8} />
                                 <span>{item.name}</span>
-                            </a>
+                            </NavLink>
                         )
                     })}
+
                 </nav>
             </div>
 
             <div className="sidebar-section">
                 <p className="sidebar-label">GENERAL</p>
 
-                <a href="#" className="nav-item">
+                <NavLink
+                    to="/settings"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? 'active' : ''}`
+                    }
+                >
                     <Settings size={16} strokeWidth={1.8} />
                     <span>Settings</span>
-                </a>
+                </NavLink>
             </div>
 
             <div className="sidebar-profile">
-                <div className="profile-avatar">JW</div>
+
+                <div className="profile-avatar">
+                    JW
+                </div>
 
                 <div className="profile-info">
                     <strong>Jonas Weber</strong>
@@ -64,6 +78,7 @@ function Sidebar() {
                 </div>
 
                 <MoreVertical size={16} />
+
             </div>
 
         </aside>

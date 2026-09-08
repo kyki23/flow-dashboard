@@ -1,93 +1,44 @@
 import './App.css'
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
-import StatCard from './components/StatCard'
-import ProductivityChart from './components/ProductivityChart'
-import UpcomingTasks from './components/UpcomingTasks'
-import ProjectProgress from './components/ProjectProgress'
-import RecentActivity from './components/RecentActivity'
+import Projects from './pages/Projects'
 
-import {
-  Zap,
-  CircleCheck,
-  Clock3,
-  TrendingUp
-} from 'lucide-react'
+import Overview from './pages/Overview'
 
 function App() {
   return (
-    <div className="app">
+    <BrowserRouter>
 
-      <Sidebar />
+      <div className="app">
 
-      <div className="app-content">
+        <Sidebar />
 
-        <Header />
+        <div className="app-content">
 
-        <main className="dashboard">
+          <Header />
 
-          <div className="dashboard-heading">
-            <h2>Good morning, Jonas 👋</h2>
-            <p>Here's what's happening across your workspace today.</p>
-          </div>
+          <Routes>
 
-          <div className="stats-grid">
-
-            <StatCard
-              title="ACTIVE PROJECTS"
-              value="3"
-              subtitle="+2 this month"
-              icon={Zap}
-              tone="purple"
+            <Route
+              path="/"
+              element={<Overview />}
             />
 
-            <StatCard
-              title="TASKS COMPLETED"
-              value="2"
-              subtitle="82% completion rate"
-              icon={CircleCheck}
-              tone="green"
+            <Route
+              path="/projects"
+              element={<Projects />}
             />
 
-            <StatCard
-              title="IN PROGRESS"
-              value="3"
-              subtitle="Across all projects"
-              icon={Clock3}
-              tone="orange"
-            />
+          </Routes>
 
-            <StatCard
-              title="PRODUCTIVITY"
-              value="94%"
-              subtitle="↑ 6% vs last week"
-              icon={TrendingUp}
-              tone="teal"
-            />
-
-          </div>
-
-          <div className="dashboard-main-grid">
-
-            <ProductivityChart />
-
-            <UpcomingTasks />
-
-          </div>
-          <div className="dashboard-bottom-grid">
-
-            <ProjectProgress />
-
-            <RecentActivity />
-
-          </div>
-
-        </main>
+        </div>
 
       </div>
 
-    </div>
+    </BrowserRouter>
   )
 }
 
