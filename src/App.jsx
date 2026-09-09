@@ -8,10 +8,10 @@ import {
 
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
-
 import Overview from './pages/Overview'
 import Projects from './pages/Projects'
 import Tasks from './pages/Tasks'
+import Calendar from './pages/Calendar'
 
 function App() {
   return (
@@ -40,6 +40,10 @@ function App() {
             <Route
               path="/tasks"
               element={<Tasks />}
+            />
+            <Route
+              path="/calendar"
+              element={<Calendar />}
             />
 
           </Routes>
