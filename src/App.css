@@ -2274,3 +2274,149 @@
         padding: 20px;
     }
 }
+
+/* =========================
+   FINAL MOBILE CALENDAR FIX
+========================= */
+
+@media (max-width: 768px) {
+
+    .calendar-card {
+        overflow-x: hidden;
+    }
+
+    .calendar-header,
+    .calendar-weekdays,
+    .calendar-grid {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .calendar-weekdays span {
+        padding: 9px 2px;
+        text-align: center;
+        font-size: 7px;
+    }
+
+    .calendar-day {
+        min-width: 0;
+        min-height: 82px;
+        padding: 5px 3px;
+    }
+
+    .calendar-day-number {
+        width: 20px;
+        height: 20px;
+        font-size: 8px;
+    }
+
+    .calendar-event {
+        padding: 4px 3px;
+        font-size: 6px;
+    }
+
+    .calendar-event-actions {
+        display: none;
+    }
+}
+
+/* PROJECT EDIT BUTTON */
+
+.project-edit-button {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #a0a3a8;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.project-edit-button:hover {
+    background: #e8f0ff;
+    color: #3976d8;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+    padding: 48px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid #dededb;
+    border-radius: 12px;
+}
+
+.empty-state h3 {
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 6px;
+}
+
+.empty-state p {
+    color: #999ca1;
+
+    font-size: 9px;
+}
+
+/* =========================
+   404 PAGE
+========================= */
+
+.not-found {
+    min-height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.not-found>span {
+    color: #08c9bb;
+
+    font-size: 54px;
+    font-weight: 700;
+}
+
+.not-found h2 {
+    margin-top: 8px;
+
+    font-size: 22px;
+}
+
+.not-found p {
+    margin-top: 8px;
+
+    color: #999ca1;
+
+    font-size: 10px;
+}
+
+.not-found-button {
+    margin-top: 20px;
+
+    padding: 10px 14px;
+
+    border-radius: 7px;
+
+    background: #111317;
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 600;
+}

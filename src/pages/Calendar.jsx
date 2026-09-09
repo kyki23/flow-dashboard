@@ -109,6 +109,14 @@ function Calendar() {
     }
 
     function handleDeleteEvent(eventId) {
+        const shouldDelete = window.confirm(
+            'Are you sure you want to delete this event?'
+        )
+
+        if (!shouldDelete) {
+            return
+        }
+
         setEventList((currentEvents) =>
             currentEvents.filter(
                 (event) => event.id !== eventId

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import initialTasks from '../data/tasks'
 import TaskCard from '../components/TaskCard'
 import NewTaskModal from '../components/NewTaskModal'
 
 function Tasks() {
+    const [searchParams, setSearchParams] = useSearchParams()
+
     const [taskList, setTaskList] = useState(() => {
         const savedTasks = localStorage.getItem('flow-tasks')
 
@@ -27,6 +30,15 @@ function Tasks() {
         )
     }, [taskList])
 
+    useEffect(() => {
+        if (searchParams.get('newTask') === 'true') {
+            setTaskToEdit(null)
+            setIsModalOpen(true)
+
+            setSearchParams({}, { replace: true })
+        }
+    }, [searchParams, setSearchParams])
+
     function handleAddTask(newTask) {
         setTaskList((currentTasks) => [
             ...currentTasks,
@@ -35,6 +47,14 @@ function Tasks() {
     }
 
     function handleDeleteTask(taskId) {
+        const shouldDelete = window.confirm(
+            'Are you sure you want to delete this task?'
+        )
+
+        if (!shouldDelete) {
+            return
+        }
+
         setTaskList((currentTasks) =>
             currentTasks.filter(
                 (task) => task.id !== taskId
@@ -154,18 +174,25 @@ function Tasks() {
 
             </div>
 
-            <div className="tasks-grid">
+            {filteredTasks.length > 0 ? (
+                <div className="tasks-grid">
 
-                {filteredTasks.map((task) => (
-                    <TaskCard
-                        key={task.id}
-                        task={task}
-                        onEdit={handleEditTask}
-                        onDelete={handleDeleteTask}
-                    />
-                ))}
+                    {filteredTasks.map((task) => (
+                        <TaskCard
+                            key={task.id}
+                            task={task}
+                            onEdit={handleEditTask}
+                            onDelete={handleDeleteTask}
+                        />
+                    ))}
 
-            </div>
+                </div>
+            ) : (
+                <div className="empty-state">
+                    <h3>No tasks found</h3>
+                    <p>Try changing your search or filters.</p>
+                </div>
+            )}
 
             <NewTaskModal
                 isOpen={isModalOpen}

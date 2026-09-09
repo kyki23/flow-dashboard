@@ -5,10 +5,14 @@ import {
     Menu
 } from 'lucide-react'
 
-import { useLocation } from 'react-router-dom'
+import {
+    useLocation,
+    useNavigate
+} from 'react-router-dom'
 
 function Header({ onMenuToggle }) {
     const location = useLocation()
+    const navigate = useNavigate()
 
     const pageTitles = {
         '/': 'Overview',
@@ -21,6 +25,10 @@ function Header({ onMenuToggle }) {
 
     const currentTitle =
         pageTitles[location.pathname] || 'FLOW'
+
+    function handleNewTask() {
+        navigate('/tasks?newTask=true')
+    }
 
     return (
         <header className="topbar">
@@ -61,7 +69,10 @@ function Header({ onMenuToggle }) {
                     JW
                 </div>
 
-                <button className="new-task-button">
+                <button
+                    className="new-task-button"
+                    onClick={handleNewTask}
+                >
                     <Plus size={16} />
                     New Task
                 </button>

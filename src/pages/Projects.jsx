@@ -35,6 +35,14 @@ function Projects() {
     }
 
     function handleDeleteProject(projectId) {
+        const shouldDelete = window.confirm(
+            'Are you sure you want to delete this project?'
+        )
+
+        if (!shouldDelete) {
+            return
+        }
+
         setProjectList((currentProjects) =>
             currentProjects.filter(
                 (project) => project.id !== projectId
@@ -218,18 +226,25 @@ function Projects() {
 
             </div>
 
-            <div className="projects-grid">
+            {filteredProjects.length > 0 ? (
+                <div className="projects-grid">
 
-                {filteredProjects.map((project) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                        onDelete={handleDeleteProject}
-                        onEdit={handleEditProject}
-                    />
-                ))}
+                    {filteredProjects.map((project) => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                            onDelete={handleDeleteProject}
+                            onEdit={handleEditProject}
+                        />
+                    ))}
 
-            </div>
+                </div>
+            ) : (
+                <div className="empty-state">
+                    <h3>No projects found</h3>
+                    <p>Try changing your search or filters.</p>
+                </div>
+            )}
 
             <NewProjectModal
                 isOpen={isModalOpen}

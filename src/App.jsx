@@ -16,6 +16,7 @@ import Tasks from './pages/Tasks'
 import Calendar from './pages/Calendar'
 import Activity from './pages/Activity'
 import Settings from './pages/Settings'
+import NotFound from './pages/NotFound'
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -74,6 +75,11 @@ function App() {
             <Route
               path="/settings"
               element={<Settings />}
+            />
+
+            <Route
+              path="*"
+              element={<NotFound />}
             />
 
           </Routes>
