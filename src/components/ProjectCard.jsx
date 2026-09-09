@@ -1,6 +1,6 @@
-import { Trash2 } from 'lucide-react'
+import { Pencil, Trash2 } from 'lucide-react'
 
-function ProjectCard({ project, onDelete }) {
+function ProjectCard({ project, onDelete, onEdit }) {
     return (
         <article className="project-card">
 
@@ -25,6 +25,14 @@ function ProjectCard({ project, onDelete }) {
                     >
                         {project.status}
                     </span>
+
+                    <button
+                        className="project-edit-button"
+                        onClick={() => onEdit(project)}
+                        title="Edit project"
+                    >
+                        <Pencil size={14} />
+                    </button>
 
                     <button
                         className="project-delete-button"

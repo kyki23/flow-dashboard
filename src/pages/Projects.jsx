@@ -23,7 +23,9 @@ function Projects() {
     const [searchTerm, setSearchTerm] = useState('')
     const [statusFilter, setStatusFilter] = useState('All')
     const [sortBy, setSortBy] = useState('Due Date')
+
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [projectToEdit, setProjectToEdit] = useState(null)
 
     function handleAddProject(newProject) {
         setProjectList((currentProjects) => [
@@ -38,6 +40,31 @@ function Projects() {
                 (project) => project.id !== projectId
             )
         )
+    }
+
+    function handleEditProject(project) {
+        setProjectToEdit(project)
+        setIsModalOpen(true)
+    }
+
+    function handleUpdateProject(updatedProject) {
+        setProjectList((currentProjects) =>
+            currentProjects.map((project) =>
+                project.id === updatedProject.id
+                    ? updatedProject
+                    : project
+            )
+        )
+    }
+
+    function handleCloseModal() {
+        setIsModalOpen(false)
+        setProjectToEdit(null)
+    }
+
+    function handleOpenNewProject() {
+        setProjectToEdit(null)
+        setIsModalOpen(true)
     }
 
     const filteredProjects = projectList
@@ -100,7 +127,7 @@ function Projects() {
 
                 <button
                     className="new-project-button"
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={handleOpenNewProject}
                 >
                     + New Project
                 </button>
@@ -140,17 +167,9 @@ function Projects() {
                         setSortBy(event.target.value)
                     }
                 >
-                    <option value="Due Date">
-                        Sort: Due Date
-                    </option>
-
-                    <option value="Progress">
-                        Sort: Progress
-                    </option>
-
-                    <option value="Name">
-                        Sort: Name
-                    </option>
+                    <option value="Due Date">Sort: Due Date</option>
+                    <option value="Progress">Sort: Progress</option>
+                    <option value="Name">Sort: Name</option>
                 </select>
 
             </div>
@@ -206,6 +225,7 @@ function Projects() {
                         key={project.id}
                         project={project}
                         onDelete={handleDeleteProject}
+                        onEdit={handleEditProject}
                     />
                 ))}
 
@@ -213,8 +233,10 @@ function Projects() {
 
             <NewProjectModal
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={handleCloseModal}
                 onAddProject={handleAddProject}
+                onUpdateProject={handleUpdateProject}
+                projectToEdit={projectToEdit}
             />
 
         </main>

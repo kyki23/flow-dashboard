@@ -1,11 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { X } from 'lucide-react'
 
-function NewProjectModal({ isOpen, onClose, onAddProject }) {
+function NewProjectModal({
+    isOpen,
+    onClose,
+    onAddProject,
+    onUpdateProject,
+    projectToEdit
+}) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [status, setStatus] = useState('Planning')
     const [dueDate, setDueDate] = useState('')
+
+    useEffect(() => {
+        if (projectToEdit) {
+            setName(projectToEdit.name)
+            setDescription(projectToEdit.description)
+            setStatus(projectToEdit.status)
+
+            const parsedDate = new Date(projectToEdit.dueDate)
+
+            if (!Number.isNaN(parsedDate.getTime())) {
+                setDueDate(parsedDate.toISOString().split('T')[0])
+            } else {
+                setDueDate('')
+            }
+        } else {
+            setName('')
+            setDescription('')
+            setStatus('Planning')
+            setDueDate('')
+        }
+    }, [projectToEdit, isOpen])
 
     if (!isOpen) {
         return null
@@ -18,25 +45,33 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
             return
         }
 
-        const newProject = {
-            id: Date.now(),
-            name: name,
-            description: description,
-            status: status,
-            progress: 0,
-            color: 'teal',
-            initials: name.charAt(0).toUpperCase(),
-            tasks: '0/0',
-            dueDate: dueDate || 'No deadline',
-            members: ['JW']
+        if (projectToEdit) {
+            const updatedProject = {
+                ...projectToEdit,
+                name,
+                description,
+                status,
+                dueDate: dueDate || projectToEdit.dueDate,
+                initials: name.charAt(0).toUpperCase()
+            }
+
+            onUpdateProject(updatedProject)
+        } else {
+            const newProject = {
+                id: Date.now(),
+                name,
+                description,
+                status,
+                progress: 0,
+                color: 'teal',
+                initials: name.charAt(0).toUpperCase(),
+                tasks: '0/0',
+                dueDate: dueDate || 'No deadline',
+                members: ['JW']
+            }
+
+            onAddProject(newProject)
         }
-
-        onAddProject(newProject)
-
-        setName('')
-        setDescription('')
-        setStatus('Planning')
-        setDueDate('')
 
         onClose()
     }
@@ -47,9 +82,15 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
             <div className="project-modal">
 
                 <div className="modal-header">
+
                     <div>
-                        <span>NEW PROJECT</span>
-                        <h2>Create project</h2>
+                        <span>
+                            {projectToEdit ? 'EDIT PROJECT' : 'NEW PROJECT'}
+                        </span>
+
+                        <h2>
+                            {projectToEdit ? 'Edit project' : 'Create project'}
+                        </h2>
                     </div>
 
                     <button
@@ -58,6 +99,7 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
                     >
                         <X size={18} />
                     </button>
+
                 </div>
 
                 <form
@@ -67,6 +109,7 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
 
                     <label>
                         Project name
+
                         <input
                             type="text"
                             placeholder="e.g. Website Redesign"
@@ -77,6 +120,7 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
 
                     <label>
                         Description
+
                         <textarea
                             placeholder="Short project description..."
                             value={description}
@@ -86,6 +130,7 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
 
                     <label>
                         Status
+
                         <select
                             value={status}
                             onChange={(event) => setStatus(event.target.value)}
@@ -99,6 +144,7 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
 
                     <label>
                         Due date
+
                         <input
                             type="date"
                             value={dueDate}
@@ -120,7 +166,7 @@ function NewProjectModal({ isOpen, onClose, onAddProject }) {
                             type="submit"
                             className="create-project-button"
                         >
-                            Create Project
+                            {projectToEdit ? 'Save Changes' : 'Create Project'}
                         </button>
 
                     </div>
