@@ -1,10 +1,24 @@
 import { Search, Bell, Plus } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
 
 function Header() {
+    const location = useLocation()
+
+    const pageTitles = {
+        '/': 'Overview',
+        '/projects': 'Projects',
+        '/tasks': 'Tasks',
+        '/calendar': 'Calendar',
+        '/activity': 'Activity',
+        '/settings': 'Settings'
+    }
+
+    const currentTitle = pageTitles[location.pathname] || 'FLOW'
+
     return (
         <header className="topbar">
 
-            <h1>Overview</h1>
+            <h1>{currentTitle}</h1>
 
             <div className="topbar-actions">
 

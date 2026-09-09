@@ -1,12 +1,17 @@
 import './App.css'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom'
 
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
-import Projects from './pages/Projects'
 
 import Overview from './pages/Overview'
+import Projects from './pages/Projects'
+import Tasks from './pages/Tasks'
 
 function App() {
   return (
@@ -30,6 +35,11 @@ function App() {
             <Route
               path="/projects"
               element={<Projects />}
+            />
+
+            <Route
+              path="/tasks"
+              element={<Tasks />}
             />
 
           </Routes>
