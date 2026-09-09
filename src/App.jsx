@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 
 import {
@@ -8,22 +9,40 @@ import {
 
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
+
 import Overview from './pages/Overview'
 import Projects from './pages/Projects'
 import Tasks from './pages/Tasks'
 import Calendar from './pages/Calendar'
+import Activity from './pages/Activity'
+import Settings from './pages/Settings'
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  function toggleSidebar() {
+    setIsSidebarOpen((current) => !current)
+  }
+
+  function closeSidebar() {
+    setIsSidebarOpen(false)
+  }
+
   return (
     <BrowserRouter>
 
       <div className="app">
 
-        <Sidebar />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={closeSidebar}
+        />
 
         <div className="app-content">
 
-          <Header />
+          <Header
+            onMenuToggle={toggleSidebar}
+          />
 
           <Routes>
 
@@ -41,9 +60,20 @@ function App() {
               path="/tasks"
               element={<Tasks />}
             />
+
             <Route
               path="/calendar"
               element={<Calendar />}
+            />
+
+            <Route
+              path="/activity"
+              element={<Activity />}
+            />
+
+            <Route
+              path="/settings"
+              element={<Settings />}
             />
 
           </Routes>

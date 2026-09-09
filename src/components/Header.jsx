@@ -1,7 +1,13 @@
-import { Search, Bell, Plus } from 'lucide-react'
+import {
+    Search,
+    Bell,
+    Plus,
+    Menu
+} from 'lucide-react'
+
 import { useLocation } from 'react-router-dom'
 
-function Header() {
+function Header({ onMenuToggle }) {
     const location = useLocation()
 
     const pageTitles = {
@@ -13,18 +19,36 @@ function Header() {
         '/settings': 'Settings'
     }
 
-    const currentTitle = pageTitles[location.pathname] || 'FLOW'
+    const currentTitle =
+        pageTitles[location.pathname] || 'FLOW'
 
     return (
         <header className="topbar">
 
-            <h1>{currentTitle}</h1>
+            <div className="topbar-left">
+
+                <button
+                    className="mobile-menu-button"
+                    onClick={onMenuToggle}
+                    aria-label="Open menu"
+                >
+                    <Menu size={20} />
+                </button>
+
+                <h1>{currentTitle}</h1>
+
+            </div>
 
             <div className="topbar-actions">
 
                 <div className="search-box">
                     <Search size={15} />
-                    <input type="text" placeholder="Search..." />
+
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                    />
+
                     <span>⌘K</span>
                 </div>
 
