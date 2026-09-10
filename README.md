@@ -1,16 +1,92 @@
-# React + Vite
+# FLOW Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A responsive project management dashboard built with React and Vite.
 
-Currently, two official plugins are available:
+FLOW is a frontend portfolio project focused on building a realistic SaaS-style application with reusable React components, client-side routing, CRUD functionality, filtering, persistent local data and responsive layouts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+https://flow-dashboard-sable.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the Oxlint configuration
+- Responsive desktop and mobile dashboard
+- React Router navigation
+- Project management
+- Create, edit and delete projects
+- Project search, filtering and sorting
+- Task management
+- Create, edit and delete tasks
+- Task search and filtering
+- Monthly calendar view
+- Task deadlines displayed in the calendar
+- Create, edit and delete calendar events
+- Activity feed
+- Profile settings interface
+- Mobile sidebar navigation
+- Empty states
+- Delete confirmations
+- Custom 404 page
+- LocalStorage persistence
+- Production deployment with Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Tech Stack
+
+- React
+- JavaScript
+- Vite
+- React Router
+- CSS
+- Lucide React
+- LocalStorage
+- Vercel
+- Git & GitHub
+
+## What I Practiced
+
+This project helped me practice and understand:
+
+- React components
+- Props
+- State with `useState`
+- Side effects with `useEffect`
+- Rendering lists with `.map()`
+- Filtering data with `.filter()`
+- Updating arrays and objects in React state
+- CRUD operations
+- Controlled forms
+- Conditional rendering
+- Client-side routing
+- URL search parameters
+- LocalStorage persistence
+- Responsive layouts
+- Component-based application structure
+
+## Project Structure
+
+```text
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── Sidebar.jsx
+│   ├── StatCard.jsx
+│   ├── ProjectCard.jsx
+│   ├── TaskCard.jsx
+│   ├── NewProjectModal.jsx
+│   ├── NewTaskModal.jsx
+│   ├── NewEventModal.jsx
+│   └── ...
+├── data/
+│   ├── projects.js
+│   └── tasks.js
+├── pages/
+│   ├── Overview.jsx
+│   ├── Projects.jsx
+│   ├── Tasks.jsx
+│   ├── Calendar.jsx
+│   ├── Activity.jsx
+│   ├── Settings.jsx
+│   └── NotFound.jsx
+├── App.jsx
+├── App.css
+└── main.jsx
